@@ -24,10 +24,6 @@ app.use(cors({
 // Initialize default category
 initializeDefaultCategory();
 
-// Define your products route logic here
-app.use('/', (req, res) => {
-    res.json({ message: "Working fine" });
-  });
 // Define routes
 app.use('/api/products', require('./routes/products'));
 app.use('/api/categories', require('./routes/categories'));
