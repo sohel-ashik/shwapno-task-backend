@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
-const fetch = require('node-fetch');
 
 // @route   GET api/products
 // @desc    Get all products (with optional category filter)
@@ -129,29 +128,21 @@ router.delete('/:id', async (req, res) => {
 });
 
 // @route   GET api/products/barcode/:barcode
-// @desc    Fetch product from external API by barcode
+// @desc    Get product by barcode from local database
 router.get('/barcode/:barcode', async (req, res) => {
   try {
     const { barcode } = req.params;
     
-    // First check if the product already exists in our database
-    const existingProduct = await Product.findOne({ barcode });
+    // Check if the product exists in our database
+    const product = await Product.findOne({ barcode });
     
-    if (existingProduct) {
-      return res.json({ status: true, data: existingProduct, source: 'local' });
+    if (!product) {
+      return res.status(404).json({ status: false, error: 'Product not found' });
     }
     
-    // If not found locally, try to fetch from external API
-    const response = await fetch(`https://products-test-aci.onrender.com/product/${barcode}`);
-    const data = await response.json();
-    
-    if (!data.status || !data.product) {
-      return res.status(404).json({ status: false, error: 'Product not found in external API' });
-    }
-    
-    res.json({ status: true, data: data.product, source: 'external' });
+    res.json({ status: true, data: product, source: 'local' });
   } catch (error) {
-    console.error('Error fetching product from external API:', error);
+    console.error('Error fetching product by barcode:', error);
     res.status(500).json({ status: false, error: 'Server error' });
   }
 });
