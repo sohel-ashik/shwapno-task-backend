@@ -18,8 +18,7 @@ const categorySchema = new mongoose.Schema(
   }
 );
 
-// Create index on name for faster lookups
-categorySchema.index({ name: 1 });
+
 
 const Category = mongoose.model('Category', categorySchema);
 

@@ -25,10 +25,7 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-// Create index on barcode for faster lookups
-productSchema.index({ barcode: 1 });
-// Create index on category for filtering
-productSchema.index({ category: 1 });
+
 
 const Product = mongoose.model('Product', productSchema);
 
