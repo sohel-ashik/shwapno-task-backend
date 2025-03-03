@@ -1,0 +1,28 @@
+{
+  "name": "shwapno-task-backend",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/sohel-ashik/shwapno-task-backend#readme",
+  "bugs": {
+    "url": "https://github.com/sohel-ashik/shwapno-task-backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sohel-ashik/shwapno-task-backend.git"
+  },
+  "license": "ISC",
+  "author": "Ashik",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.1.0",
+    "node-fetch": "^3.3.2"
+  }
+}
